@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+{% if app.user %}
+<div id="form">
+    <h1>Inscription</h1>
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.username, {'label': 'Votre Pseudo:', 'attr': {'placeholder': 'Pseudo..', 'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(form.email, {'label': 'Votre adresse Email:', 'attr': {'placeholder': 'Email..', 'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(form.password, {'label': 'Votre mot de passe:', 'attr': {'placeholder': 'Password..', 'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(form.confirm_password, {'label': 'Retapez votre mot de passe:', 'attr': {'placeholder': 'Retype Password..', 'class': 'form-control'}}) }}
+        </div>
+        <button type="submit" class="btn btn-success">S'inscrire</button>
+    {{ form_end(form) }}
+</div>
+{% else %}
+    <h3>Vous devez d'abord vous connecté pour avoir accès à la parti admin</h3>
+    <a href="{{ path('security_login') }}" class="btn btn-success">Connexion</a>
+{% endif %}
+{% endblock %}
+{% endblock %}

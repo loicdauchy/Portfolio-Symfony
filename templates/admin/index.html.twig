@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Interface{% endblock %}
+
+{% block body %}
+{% if app.user %}
+
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center align-items-center">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Add new Project
+            </button>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adding Project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{ form_start(addForm) }}
+            <div class="modal-body">
+                
+                    <div class="form-group" style="width:100% !important;">
+                        {{ form_row(addForm.title, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group" style="width:100% !important;">
+                        {{ form_row(addForm.description, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group" style="width:100% !important;">
+                        {{ form_row(addForm.image, {'attr': {'class': 'form-control addImage', 'placeholder': 'Cliquez ici pour ajouter une image..'}}) }}
+                    </div>
+
+                    <div class="form-group" style="width:100% !important;">
+                        {{ form_row(addForm.github, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group" style="width:100% !important;">
+                        {{ form_row(addForm.weblink, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add project</button>
+            </div>
+            {{ form_end(addForm) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="portfolio">
+        <h2 class="mb-5"> Projets: </h2>
+        <div class="row justify-content-center align-items-center">
+            
+            {% for project in projects %}
+                <div id="project" class="col-12 col-md-6 col-lg-3 d-flex justify-content-center align-items-center">
+                    <img src="{{ project.image }}">
+                    <h3>{{ project.title }}</h3>
+                    <div class="d-flex">
+                        <a class="btn btn-warning mx-1" href="{{ path('edite', {'id' : project.id}) }}">Editer</a>
+                        <a class="btn btn-primary mx-1" href="{{ path('portfolio_show', {'id' : project.id}) }}">Voir plus</a>
+                        <a class="btn btn-danger mx-1" href="{{ path('delete', {'id' : project.id}) }}">Supprimer</a>
+                    </div>
+                    
+                </div>                   
+
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <h3>Vous devez d'abord vous connecté pour avoir accès à la parti admin</h3>
+    <a href="{{ path('security_login') }}" class="btn btn-success">Connexion</a>
+{% endif %}
+{% endblock %}
+

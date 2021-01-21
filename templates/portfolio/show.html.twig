@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Portfolio{% endblock %}
+{% block body %}
+    <div class="container" id="portfolioShow">
+        <h1> {{ project.title }} </h1>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-6"><img id="showImg" src="{{ project.image }}"></div>
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column">
+                {{ project.description | raw }}
+                {{ project.github | raw }}
+                {{ project.weblink | raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

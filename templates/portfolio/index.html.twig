@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block body %}
+    <div class="container" id="portfolio">
+        <h1> Nos Réalisations </h1>
+        <div class="row justify-content-center align-items-center">
+            
+            {% for project in projects %}
+                <div id="project" class="col-12 col-md-6 col-lg-3 d-flex justify-content-center align-items-center">
+                    <img src="{{ project.image }}">
+                    <h3>{{ project.title }}</h3>
+                    <a class="btn btn-primary" href="{{ path('portfolio_show', {'id' : project.id}) }}">Voir plus</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+#header{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: -1;
+    background: url('https://picsum.photos/1200/800') fixed;
+    background-size: cover;
+    background-position: center;
+}
+#header > .row{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row > .h1B{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+}
+#project{
+    height: 300px !important;
+    width: 300px !important;
+    flex-direction: column;
+    margin: 20px;
+    margin-bottom: 100px !important;
+}
+#project > img{
+    height: 300px !important;
+    width: 300px !important;
+}
+#portfolio{
+    margin-top: 100px;
+}
+#portfolio > h1{
+    margin-bottom: 50px;
+}
+#showImg{
+    width: 100% !important;
+    height: 80% !important;
+}
+.form-group{
+    width: 60%;
+}
+#form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#form > form{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#updateForm > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.addImage{
+    cursor: pointer;
+    text-align: center;
+    background: rgb(148, 142, 142);
+    color: white;
+}
+.addImage:hover{
+    background: rgb(110, 109, 109);
+}
+.addImage::placeholder{
+    color: white;
+}

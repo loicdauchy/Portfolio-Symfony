@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Update{% endblock %}
+
+{% block body %}
+{% if app.user %}
+
+<h2>Modification du projet:</h2>
+
+    <div class="container-fluid">
+        <div id="updateForm" class="row justify-content-center align-items-center">
+            {{ form_start(upForm) }}
+                
+                    <div class="form-group">
+                        {{ form_row(upForm.title, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(upForm.description, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(upForm.image, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(upForm.github, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(upForm.weblink, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <input type="submit" class="btn btn-success">
+                
+            {{ form_end(upForm) }}
+
+        </div>
+    </div>
+        
+{% else %}
+    <h3>Vous devez d'abord vous connecté pour avoir accès à la parti admin</h3>
+    <a href="{{ path('security_login') }}" class="btn btn-success">Connexion</a>
+{% endif %}
+{% endblock %}
