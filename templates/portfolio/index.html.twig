@@ -4,13 +4,22 @@
 
 {% block body %}
     <div class="container" id="portfolio">
-        <h1> Nos Réalisations </h1>
+        <h2 class="mb-5"> Nos Réalisations: </h2>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+            <h5>Filtre par tags:</h5>
+            <select name="" id="tags" class="form-control">
+            {% for tag in tags %}
+                <option value="{{ tag.tagName }}">{{ tag.tagName }}</option>
+            {% endfor %}
+            </select>
+        </div>
         <div class="row justify-content-center align-items-center">
             
             {% for project in projects %}
                 <div id="project" class="col-12 col-md-6 col-lg-3 d-flex justify-content-center align-items-center">
                     <img src="{{ project.image }}">
                     <h3>{{ project.title }}</h3>
+                    <h6>Tag: {{ project.tags.tagName }}</h6>
                     <a class="btn btn-primary" href="{{ path('portfolio_show', {'id' : project.id}) }}">Voir plus</a>
                 </div>
             {% endfor %}

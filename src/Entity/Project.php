@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,13 @@ class Project
      * @ORM\Column(type="string", length=255)
      */
     private $weblink;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Tags::class, inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $tags;
+
 
     public function getId(): ?int
     {
@@ -103,6 +112,18 @@ class Project
     public function setWeblink(string $weblink): self
     {
         $this->weblink = $weblink;
+
+        return $this;
+    }
+
+    public function getTags(): ?Tags
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?Tags $tags): self
+    {
+        $this->tags = $tags;
 
         return $this;
     }
