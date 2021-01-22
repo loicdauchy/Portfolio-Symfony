@@ -19,6 +19,21 @@ class TagsRepository extends ServiceEntityRepository
         parent::__construct($registry, Tags::class);
     }
 
+
+        /**
+     * @return Tags[] Returns an array of Tags objects
+     */  
+    public function findTagName($val): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 
+            'SELECT * FROM tags
+            WHERE id = :val';
+        $search = $conn->prepare($sql);
+        $search->execute(['val' => $val]);
+        return $search->fetchAllAssociative();
+    }
+
     // /**
     //  * @return Tags[] Returns an array of Tags objects
     //  */

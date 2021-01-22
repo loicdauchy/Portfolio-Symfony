@@ -3,13 +3,16 @@
 {% block title %}Portfolio{% endblock %}
 {% block body %}
     <div class="container" id="portfolioShow">
-        <h1> {{ project.title }} </h1>
+        <h2> {{ project.title }} </h2>
         <div class="row justify-content-center align-items-center">
             <div class="col-12 col-lg-6"><img id="showImg" src="{{ project.image }}"></div>
             <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column">
                 {{ project.description | raw }}
-                {{ project.github | raw }}
-                {{ project.weblink | raw }}
+                <div id="link">
+                    <a href="{{ project.github | raw }}"><i class="fab fa-github-alt"></i></a>
+                    <a href="{{ project.weblink | raw }}"><i class="fas fa-link"></i></a>
+                </div>
+                
             </div>
         </div>
     </div>

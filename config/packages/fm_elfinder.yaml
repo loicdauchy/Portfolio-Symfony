@@ -9,4 +9,4 @@ fm_elfinder:
                         path: uploads
                         upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
                         upload_deny: ['all']
-                        upload_max_size: 2M
+                        upload_max_size: 10M

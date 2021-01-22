@@ -10,6 +10,19 @@
             </div>
         </div>
     </div>
+    <h2 class="mb-5 mt-5">Nos dernières réalisations: </h2>
+    <div id="lastProject" class="container-fluid">
+    
+        <div style="width:100%" id="showProject" class="row justify-content-center align-items-center">
+            {% for project in lastProject %}
+                <div id="project" class="col-12 col-md-6 col-lg-3 d-flex justify-content-center align-items-center">
+                    <img src="{{ project.image }}">
+                    <h3>{{ project.title }}</h3>
+                    <a class="btn btn-primary" href="{{ path('portfolio_show', {'id' : project.id}) }}">Voir plus</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     
 
 {% endblock %}

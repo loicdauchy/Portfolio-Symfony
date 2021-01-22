@@ -19,22 +19,34 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
-    // /**
-    //  * @return Project[] Returns an array of Project objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Project[] Returns an array of Project objects
+     */  
+    public function findByTags($value): array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 
+            'SELECT * FROM project
+            WHERE tags_id = :value';
+        $search = $conn->prepare($sql);
+        $search->execute(['value' => $value]);
+        return $search->fetchAllAssociative();
     }
-    */
+
+        /**
+     * @return Project[] Returns an array of Project objects
+     */  
+    public function lastProject(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 
+            'SELECT * FROM project
+            ORDER BY id DESC LIMIT 3';
+        $search = $conn->prepare($sql);
+        $search->execute();
+        return $search->fetchAllAssociative();
+    }
+    
 
     /*
     public function findOneBySomeField($value): ?Project

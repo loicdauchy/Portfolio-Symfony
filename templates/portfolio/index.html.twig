@@ -4,25 +4,58 @@
 
 {% block body %}
     <div class="container" id="portfolio">
-        <h2 class="mb-5"> Nos Réalisations: </h2>
-        <div class="d-flex justify-content-center align-items-center mb-5">
-            <h5>Filtre par tags:</h5>
-            <select name="" id="tags" class="form-control">
-            {% for tag in tags %}
-                <option value="{{ tag.tagName }}">{{ tag.tagName }}</option>
-            {% endfor %}
-            </select>
-        </div>
-        <div class="row justify-content-center align-items-center">
+    {% if formResult != "" %}
+        <h2 class="mb-5"> Résultats pour le tag: <span style="color:green;">
+        {% for name in tagName %}
+        {{ name.tag_name }}
+        {% endfor %}
+        </span> </h2>
+        <a href="{{ path('portfolio') }}" class="btn btn-danger mb-5">Retour</a>
+        <div id="tagsD" class="d-flex justify-content-center align-items-center mb-5">
+
+                <h5>Filtre par tags:</h5>
+            {{ form_start(tagsForm) }}
+                 <div class="form-group" style="width:100% !important;">
+                        {{ form_row(tagsForm.tags, {'attr': {'class': 'form-control'}}) }}
+                 </div>
+                 <input type="submit" class="btn btn-success" id="searchByTags">
+            {{ form_end(tagsForm) }}       
             
-            {% for project in projects %}
+        </div>
+        <div id="showProject" class="row justify-content-center align-items-center">
+            {% for project in SearchByTags %}
                 <div id="project" class="col-12 col-md-6 col-lg-3 d-flex justify-content-center align-items-center">
                     <img src="{{ project.image }}">
                     <h3>{{ project.title }}</h3>
-                    <h6>Tag: {{ project.tags.tagName }}</h6>
+                    {% for name in tagName %}
+                    <h6 style="margin:10px 0px 10px 0px"><span id="tagColor">{{ name.tag_name }}</span></h6>
+                    {% endfor %}
                     <a class="btn btn-primary" href="{{ path('portfolio_show', {'id' : project.id}) }}">Voir plus</a>
                 </div>
             {% endfor %}
         </div>
+            {% else %}
+            <h2 class="mb-5"> Nos Réalisations: </h2>
+            <div id="tagsD" class="d-flex justify-content-center align-items-center mb-5">
+            <h5>Filtre par tags:</h5>
+            {{ form_start(tagsForm) }}
+                 <div class="form-group" style="width:100% !important;">
+                        {{ form_row(tagsForm.tags, {'attr': {'class': 'form-control'}}) }}
+                 </div>
+                 <input type="submit" class="btn btn-success" id="searchByTags">
+            {{ form_end(tagsForm) }}       
+            
+        </div>
+        <div id="showProject" class="row justify-content-center align-items-center">
+            {% for project in projects %}
+                <div id="project" class="col-12 col-md-6 col-lg-3 d-flex justify-content-center align-items-center">
+                    <img src="{{ project.image }}">
+                    <h3>{{ project.title }}</h3>
+                    <h6 style="margin:10px 0px 10px 0px"><span id="tagColor">{{ project.tags.tagName }}</span></h6>
+                    <a class="btn btn-primary" href="{{ path('portfolio_show', {'id' : project.id}) }}">Voir plus</a>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

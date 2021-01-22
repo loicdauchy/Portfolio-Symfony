@@ -4,7 +4,9 @@ namespace App\Controller;
 
 
 
+use App\Entity\Tags;
 use App\Entity\Project;
+use App\Form\AddTagsType;
 use App\Form\AddProjectType;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,15 +31,22 @@ class AdminController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($project);
             $manager->flush();
+            return $this->redirectToRoute('admin');
         }
        
-        
-        
+        $tags = new Tags();
+        $formTags = $this->createForm(AddTagsType::class, $tags);
+        $formTags->handleRequest($request);
+        if($formTags->isSubmitted() && $formTags->isValid()){
+            $manager->persist($tags);
+            $manager->flush();
+        }
 
         return $this->render('admin/index.html.twig', [
             'project' => $project,
             'addForm' => $form->createView(),
-            'projects' => $projects
+            'projects' => $projects,
+            'addTags' => $formTags->createView()
         ]);
     }
 
